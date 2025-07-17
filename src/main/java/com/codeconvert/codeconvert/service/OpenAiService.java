@@ -25,7 +25,7 @@ public class OpenAiService {
         );
 
         Map<String, Object> requestBody = Map.of(
-                "model", "gpt-4o",
+                "model", "gpt-4o-mini",
                 "messages", List.of(
                         Map.of("role", "user", "content", prompt)
                 ),
@@ -56,3 +56,4 @@ public class OpenAiService {
         return "// Error: OpenAI API failed.";
     }
 }
+
