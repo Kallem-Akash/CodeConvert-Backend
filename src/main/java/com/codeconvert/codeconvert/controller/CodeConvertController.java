@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://codexconvert.vercel.app")
+@CrossOrigin("*")
 public class CodeConvertController {
 
     @Autowired
