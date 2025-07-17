@@ -42,7 +42,7 @@ public class OpenAiService {
             return message.get("content").toString().trim();
         } catch (Exception e) {
             e.printStackTrace();
-            return "// Error: OpenAI API failed.";
+            return "// Error: OpenAI API failed."+e.getMessage();
         }
     }
 }
