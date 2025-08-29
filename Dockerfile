@@ -1,14 +1,13 @@
-# Use lightweight OpenJDK 17 base image
-FROM openjdk:21-jdk-slim
-
-# Set working directory
+# Stage 1: Build the Spring Boot app
+FROM maven:3.9.3-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the built JAR file from target folder
-COPY target/codeconvert-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose port (Render will map it automatically)
+# Stage 2: Run the app
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/codeconvert-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
