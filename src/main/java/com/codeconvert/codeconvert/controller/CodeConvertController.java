@@ -16,6 +16,12 @@ public class CodeConvertController {
     @Autowired
     private OpenAiService openAiService;
 
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "Backend is running 🚀";
+    }
+
+
     @PostMapping("/convert")
     public ResponseEntity<Map<String, String>> convert(@RequestBody ConvertRequest request) {
         String convertedCode = openAiService.convertCode(
